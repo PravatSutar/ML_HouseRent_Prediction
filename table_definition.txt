@@ -1,0 +1,35 @@
+DROP TABLE IF EXISTS RecommendationData;
+DROP TABLE IF EXISTS RatingData;
+DROP TABLE IF EXISTS AccommodationData;
+
+CREATE TABLE IF NOT EXISTS AccommodationData
+(
+  id varchar(255),
+  title varchar(255),
+  location varchar(255),
+  price int,
+  rooms int,
+  rating float,
+  type varchar(255),
+  PRIMARY KEY (ID)
+);
+
+CREATE TABLE  IF NOT EXISTS RatingData
+(
+  userId varchar(255),
+  accoId varchar(255),
+  rating int,
+  PRIMARY KEY(accoId, userId),
+  FOREIGN KEY (accoId)
+    REFERENCES Accommodation(id)
+);
+
+CREATE TABLE  IF NOT EXISTS RecommendationData
+(
+  userId varchar(255),
+  accoId varchar(255),
+  prediction float,
+  PRIMARY KEY(userId, accoId),
+  FOREIGN KEY (accoId)
+    REFERENCES Accommodation(id)
+);
